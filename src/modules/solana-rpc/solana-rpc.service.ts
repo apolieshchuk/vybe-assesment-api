@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
@@ -13,10 +13,10 @@ import {
 import { RaydimResponseInterface } from './interfaces/raydim-response.interface';
 import { GetRecentPerformanceInterface } from './interfaces/get-recent-performance.interface';
 import { GetBalanceInterface } from './interfaces/get-balance.interface';
-import { MarketCapDto } from "./dto/market-cap.dto";
-import { ApiResponse } from "./interfaces/api-response";
-import { TpsDto } from "./dto/tps.dto";
-import { WalletBalanceDto } from "./dto/wallet-balance.dto";
+import { MarketCapDto } from './dto/market-cap.dto';
+import { ApiResponse } from './interfaces/api-response';
+import { TpsDto } from './dto/tps.dto';
+import { WalletBalanceDto } from './dto/wallet-balance.dto';
 
 @Injectable()
 export class SolanaRpcService {
@@ -33,11 +33,13 @@ export class SolanaRpcService {
     // Get 5 tokens after shuffling;
     const tokens = shuffled.slice(0, 5);
 
+    // api call to get token supplies on solana rpc
     const tokensSupplies = await this.solanaRpcRequest<GetTokenSupplyInterface>(
       'getTokenSupply',
       tokens,
     );
 
+    // api call to get token prices on raydium
     const observer$ = this.httpService.get<RaydimResponseInterface>(
       `${this.config.get('RAYDIUM_API_URL')}/mint/price?mints=${tokens.join()}`,
     );
@@ -56,7 +58,7 @@ export class SolanaRpcService {
       }
       return acc;
     }, []);
-    return { data }
+    return { data };
   }
 
   async tps(): Promise<ApiResponse<TpsDto[]>> {
@@ -81,10 +83,13 @@ export class SolanaRpcService {
       return acc;
     }, [] as GetRecentPerformanceInterface[]);
 
-    const data: TpsDto[] = groupedByHours.map((item, i) => ({
-      tps: Math.round(item.numTransactions / item.samplePeriodSecs),
-      ts: i === 0 ? new Date() : new Date(Date.now() - i * groupBy * 1000 * 60),
-    }));
+    const data: TpsDto[] = groupedByHours
+      .map((item, i) => ({
+        tps: Math.round(item.numTransactions / item.samplePeriodSecs),
+        ts:
+          i === 0 ? new Date() : new Date(Date.now() - i * groupBy * 1000 * 60),
+      }))
+      .sort((a, b) => a.ts.getTime() - b.ts.getTime());
 
     return { data };
   }
@@ -102,7 +107,7 @@ export class SolanaRpcService {
     );
     const data = balances.map((item, i) => {
       return {
-        wallet: wallets[i].slice(0, 8) + '...' + wallets[i].slice(-3),
+        wallet: wallets[i].slice(0, 5) + '...' + wallets[i].slice(-3),
         balance: Math.round(item.value / SOLANA_LAMPORT),
       };
     });
