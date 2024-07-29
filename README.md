@@ -5,7 +5,7 @@
 - The project is dockerized and can be run with docker-compose
 - For caching, `Redis` was used
 - `Swagger` was used to document the API. Can be accessed at `https://{baseUrl}/api`
-- The project-api is hosted on heroku and can be accessed at https://vybe-assesment.herokuapp.com
+- The project-api is hosted on heroku and can be accessed at https://vybe-assesment-d090f83d67ce.herokuapp.com/api
 
 
 ## Installation and Running the app 
