@@ -1,0 +1,1 @@
+web: ls -l && npm run build && ls -l dist && cp .env.example dist/.env && ls -l dist  && npm run start:prod
