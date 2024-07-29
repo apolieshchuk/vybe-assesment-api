@@ -10,7 +10,6 @@ async function bootstrap() {
     .setTitle('Vybe Challenge API')
     .setDescription('Vybe Challenge API description')
     .setVersion('1.0')
-    .addTag('vybe')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

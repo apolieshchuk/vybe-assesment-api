@@ -34,9 +34,9 @@ export const MintAddressTokenMap = Object.entries(MintTokenAddress).reduce(
 );
 
 export const SOLANA_WALLETS = [
-  'FWznbcNXWQuHTawe9RxvQ2LdCENssh12dsznf4RiouN5', // Kraken
-  'u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w', // Gate.io
-  '3yFwqXBfZY4jBVUafQ1YEXw189y2dN3V5KQq9uzBDy1E', // Binance cold
+  'FWznbcNXWQuHTawe9RxvQ2LdCENssh12dsznf4RiouN5',
+  'u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w',
+  '3yFwqXBfZY4jBVUafQ1YEXw189y2dN3V5KQq9uzBDy1E',
   '42brAgAVNzMBP7aaktPvAmBSPEkehnFQejiZc53EpJFd',
   'CebN5WGQ4jvEPvsVU4EoHEpgzq1VV7AbicfhtW4xC9iM',
   'ASTyfSima4LLAdDgoFGkgqoKowG1LZFDr9fAQrg7iaJZ',

@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/market-cap": {
+      "get": {
+        "operationId": "SolanaRpcController_marketCap",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MarketCapDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tps": {
+      "get": {
+        "operationId": "SolanaRpcController_tps",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/wallet-balance": {
+      "get": {
+        "operationId": "SolanaRpcController_walletBalance",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Vybe Challenge API",
+    "description": "Vybe Challenge API description",
+    "version": "1.0",
+    "contact": {
+
+    }
+  },
+  "tags": [
+
+  ],
+  "servers": [
+
+  ],
+  "components": {
+    "schemas": {
+      "MarketCapDto": {
+        "type": "object",
+        "properties": {
+          "tokenName": {
+            "type": "string",
+            "description": "Token name",
+            "example": "JUP"
+          },
+          "tokenAddress": {
+            "type": "string",
+            "description": "Token address",
+            "example": "27G8MtK7VtTcCHkpASjSDdkWWYfoqT6ggEuKidVJidD4"
+          },
+          "marketCap": {
+            "type": "number",
+            "description": "Calculated market cap",
+            "example": 11865131260.42
+          }
+        },
+        "required": [
+          "tokenName",
+          "tokenAddress",
+          "marketCap"
+        ]
+      }
+    }
+  }
+}

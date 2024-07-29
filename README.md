@@ -37,6 +37,8 @@ $ npm install
 ```bash
 # development
 $ npm run start
+docker-compose up --build
+docker-compose -f docker-compose.yml --env-file ./.env up
 
 # watch mode
 $ npm run start:dev
