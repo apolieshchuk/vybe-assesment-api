@@ -6,7 +6,7 @@
 - For caching, `Redis` was used
 - `Swagger` was used to document the API. Can be accessed at `https://{baseUrl}/api`
 - The project-api is hosted on heroku and can be accessed at https://vybe-assesment-d090f83d67ce.herokuapp.com/api
-
+- Basic throttling was implemented to prevent abuse of the API
 
 ## Installation and Running the app 
 
