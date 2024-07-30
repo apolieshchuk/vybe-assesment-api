@@ -49,13 +49,11 @@ export class SolanaRpcService {
     const data = tokens.reduce<MarketCapDto[]>((acc, token, i) => {
       const tokenAmount = Number(tokensSupplies[i].value.uiAmount);
       const tokenPrice = Number(tokensPrice.data.data[token]);
-      if (tokenAmount && tokenPrice) {
-        acc.push({
-          tokenName: MintAddressTokenMap[token],
-          tokenAddress: token,
-          marketCap: Math.round(tokenAmount * tokenPrice * 100) / 100,
-        });
-      }
+      acc.push({
+        tokenName: MintAddressTokenMap[token],
+        tokenAddress: token,
+        marketCap: Math.round(tokenAmount * tokenPrice * 100) / 100,
+      });
       return acc;
     }, []);
     return { data };
