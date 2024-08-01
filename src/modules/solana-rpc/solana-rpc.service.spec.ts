@@ -14,7 +14,7 @@ import {
   SOLANA_WALLETS,
 } from './constants';
 import { AxiosResponse } from 'axios';
-import { MarketCapDto } from "./dto/market-cap.dto";
+import { MarketCapDto } from './dto/market-cap.dto';
 
 describe('SolanaRpcService', () => {
   let service: SolanaRpcService;

@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SolanaRpcModule } from './modules/solana-rpc/solana-rpc.module';
 import { validate } from './env.validation';
 import { AppEnvConfig } from './app-env.config';
-import { ThrottlerModule } from "@nestjs/throttler";
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -12,13 +12,14 @@ import { ThrottlerModule } from "@nestjs/throttler";
       isGlobal: true,
       validate: (env) => validate(env, AppEnvConfig),
     }),
-    ThrottlerModule.forRoot([{
-      ttl: 30 * 1000, // 30 seconds
-      limit: 10,
-    }]),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 30 * 1000, // 30 seconds
+        limit: 10,
+      },
+    ]),
   ],
   controllers: [],
-  providers: [
-  ],
+  providers: [],
 })
 export class AppModule {}

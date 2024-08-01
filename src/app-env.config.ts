@@ -1,5 +1,5 @@
-import { IsEnum, IsNotEmpty, IsString, IsUUID } from "class-validator";
-import { NodeEnv } from "./enums/node-env.enum";
+import { IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { NodeEnv } from './enums/node-env.enum';
 
 export class AppEnvConfig {
   @IsNotEmpty()
