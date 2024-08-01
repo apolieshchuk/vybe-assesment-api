@@ -17,6 +17,7 @@ import { MarketCapDto } from './dto/market-cap.dto';
 import { ApiResponse } from './interfaces/api-response';
 import { TpsDto } from './dto/tps.dto';
 import { WalletBalanceDto } from './dto/wallet-balance.dto';
+import https from 'https';
 
 @Injectable()
 export class SolanaRpcService {
@@ -116,6 +117,9 @@ export class SolanaRpcService {
     method: string,
     params: Array<string | any> = [],
   ): Promise<T[]> {
+    const axiosConfig = {
+      timeout: 10 * 1000,
+    };
     const observable$ = this.httpService.post<RpcResponseInterface<T>[]>(
       `https://solana-mainnet.rpc.extrnode.com/${this.config.get('SOLANA_RPC_ID')}`,
       params.map((param) => ({
@@ -124,8 +128,26 @@ export class SolanaRpcService {
         method,
         params: [param],
       })),
+      axiosConfig,
     );
-    const response = await lastValueFrom(observable$);
+
+    const makeRetryRequest = async (
+      retry: number,
+      delay: number,
+      count = 0,
+    ) => {
+      try {
+        return await lastValueFrom(observable$);
+      } catch (e) {
+        if (count < retry) {
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          return makeRetryRequest(retry, delay, ++count);
+        }
+        throw e;
+      }
+    };
+
+    const response = await makeRetryRequest(3, 1000);
     return response.data.map((item) => item.result);
   }
 }
