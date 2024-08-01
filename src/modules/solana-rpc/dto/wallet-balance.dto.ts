@@ -1,4 +1,3 @@
-import { MintAddressTokenMap } from '../constants';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class WalletBalanceDto {
